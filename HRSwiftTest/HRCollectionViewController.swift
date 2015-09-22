@@ -8,25 +8,30 @@
 
 import UIKit
 
-class HRCollectionViewController: UIViewController {
+class HRCollectionViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout{
     
     var collection:UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.view.backgroundColor = UIColor.whiteColor()
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing=0;
         layout.minimumLineSpacing=0;
         layout.itemSize=CGSizeMake(UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height);
-        layout.scrollDirection=UICollectionViewScrollDirection.Horizontal;
+        layout.scrollDirection=UICollectionViewScrollDirection.Vertical;
         layout.headerReferenceSize=CGSizeZero;
         layout.footerReferenceSize=CGSizeZero;
         
         collection = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
         self.view.addSubview(collection)
-//        collection.delegate = self
-//        collection.dataSource = self
+        collection.delegate = self
+        collection.dataSource = self
+        collection.registerClass(HRCollectionCell.classForCoder(), forCellWithReuseIdentifier: "myCollectionCell")
+        collection.snp_makeConstraints { (make) -> Void in
+            make.edges.equalTo(self.view)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,6 +39,36 @@ class HRCollectionViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 17
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell:HRCollectionCell = collectionView.dequeueReusableCellWithReuseIdentifier("myCollectionCell", forIndexPath: indexPath) as! HRCollectionCell
+        
+        return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let width = UIScreen.mainScreen().bounds.size.width/2 - 1
+        return CGSizeMake(width + 0.5, width - 0.5)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 0.5
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 0.5
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        print(indexPath.row)
+    }
 
     /*
     // MARK: - Navigation

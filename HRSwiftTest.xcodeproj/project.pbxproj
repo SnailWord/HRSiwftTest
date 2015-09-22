@@ -18,6 +18,7 @@
 		7E3977431BB14892008415C3 /* HRBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3977411BB14892008415C3 /* HRBaseModel.swift */; settings = {ASSET_TAGS = (); }; };
 		7E3977441BB14892008415C3 /* HRTestItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3977421BB14892008415C3 /* HRTestItem.swift */; settings = {ASSET_TAGS = (); }; };
 		7E3977481BB14965008415C3 /* HRApiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3977471BB14965008415C3 /* HRApiClient.m */; settings = {ASSET_TAGS = (); }; };
+		7E3977511BB16102008415C3 /* HRCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3977501BB16102008415C3 /* HRCollectionCell.swift */; settings = {ASSET_TAGS = (); }; };
 		C2FE138480B1B88E3B0546D3 /* Pods_HRSwiftTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7908C3E4CB259C95AACA65AC /* Pods_HRSwiftTest.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -31,14 +32,15 @@
 		7E17BA5C1BA2A40C009A60E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E17BA5F1BA2A40C009A60E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7E17BA611BA2A40C009A60E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7E17BA671BA2AB70009A60E3 /* HRCustomTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRCustomTableCell.swift; sourceTree = "<group>"; };
-		7E2AA25B1BADAC0000695357 /* HRCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRCollectionViewController.swift; sourceTree = "<group>"; };
+		7E17BA671BA2AB70009A60E3 /* HRCustomTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HRCustomTableCell.swift; path = ../HRCustomTableCell.swift; sourceTree = "<group>"; };
+		7E2AA25B1BADAC0000695357 /* HRCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HRCollectionViewController.swift; path = ../HRCollectionViewController.swift; sourceTree = "<group>"; };
 		7E2AA25D1BADB8A400695357 /* HRBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRBaseViewController.swift; sourceTree = "<group>"; };
 		7E39773C1BB14498008415C3 /* HRSwiftTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HRSwiftTest-Bridging-Header.h"; sourceTree = "<group>"; };
 		7E3977411BB14892008415C3 /* HRBaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRBaseModel.swift; sourceTree = "<group>"; };
 		7E3977421BB14892008415C3 /* HRTestItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRTestItem.swift; sourceTree = "<group>"; };
 		7E3977461BB14965008415C3 /* HRApiClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRApiClient.h; sourceTree = "<group>"; };
 		7E3977471BB14965008415C3 /* HRApiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRApiClient.m; sourceTree = "<group>"; };
+		7E3977501BB16102008415C3 /* HRCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRCollectionCell.swift; sourceTree = "<group>"; };
 		FCE64E82B31CF5FF0A116824 /* Pods-HRSwiftTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HRSwiftTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HRSwiftTest/Pods-HRSwiftTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +94,8 @@
 		7E17BA541BA2A40C009A60E3 /* HRSwiftTest */ = {
 			isa = PBXGroup;
 			children = (
+				7E39774F1BB160E9008415C3 /* views */,
+				7E3977491BB15F2C008415C3 /* viewControllers */,
 				7E3977451BB1492F008415C3 /* RequestManager */,
 				7E3977401BB14892008415C3 /* Models */,
 				7E2AA25D1BADB8A400695357 /* HRBaseViewController.swift */,
@@ -101,8 +105,6 @@
 				7E17BA5C1BA2A40C009A60E3 /* Assets.xcassets */,
 				7E17BA5E1BA2A40C009A60E3 /* LaunchScreen.storyboard */,
 				7E17BA611BA2A40C009A60E3 /* Info.plist */,
-				7E17BA671BA2AB70009A60E3 /* HRCustomTableCell.swift */,
-				7E2AA25B1BADAC0000695357 /* HRCollectionViewController.swift */,
 				7E39773C1BB14498008415C3 /* HRSwiftTest-Bridging-Header.h */,
 			);
 			path = HRSwiftTest;
@@ -125,6 +127,23 @@
 			);
 			name = RequestManager;
 			path = APIClient;
+			sourceTree = "<group>";
+		};
+		7E3977491BB15F2C008415C3 /* viewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7E2AA25B1BADAC0000695357 /* HRCollectionViewController.swift */,
+			);
+			path = viewControllers;
+			sourceTree = "<group>";
+		};
+		7E39774F1BB160E9008415C3 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				7E3977501BB16102008415C3 /* HRCollectionCell.swift */,
+				7E17BA671BA2AB70009A60E3 /* HRCustomTableCell.swift */,
+			);
+			path = views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,6 +275,7 @@
 				7E17BA581BA2A40C009A60E3 /* ViewController.swift in Sources */,
 				7E3977481BB14965008415C3 /* HRApiClient.m in Sources */,
 				7E17BA681BA2AB70009A60E3 /* HRCustomTableCell.swift in Sources */,
+				7E3977511BB16102008415C3 /* HRCollectionCell.swift in Sources */,
 				7E3977431BB14892008415C3 /* HRBaseModel.swift in Sources */,
 				7E3977441BB14892008415C3 /* HRTestItem.swift in Sources */,
 				7E17BA561BA2A40C009A60E3 /* AppDelegate.swift in Sources */,

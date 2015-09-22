@@ -45,8 +45,8 @@ class HRCustomTableCell: UITableViewCell {
             make.bottom.equalTo(self.contentView.snp_bottom).offset(-10)
             make.left.equalTo(self.contentView.snp_left).offset(10)
             make.width.equalTo(iconImage.snp_height)
-            
         }
+        
         title = UILabel.init()
         self.contentView.addSubview(title)
         title.snp_makeConstraints { (make) -> Void in

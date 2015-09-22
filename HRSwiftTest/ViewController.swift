@@ -20,7 +20,7 @@ class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegat
         
         let btn:UIButton = UIButton(type: UIButtonType.RoundedRect)
         btn.frame = CGRectMake(20, 60, 60, 30)
-        btn.setTitle("test", forState: UIControlState.Normal)
+        btn.setTitle("presentView", forState: UIControlState.Normal)
         btn.backgroundColor = UIColor.redColor()
         btn.addTarget(self, action: NSSelectorFromString("doSomeThing"), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(btn)
@@ -59,7 +59,10 @@ class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegat
     }
 
     func doSomeThing(){
-        print("fuck swift", terminator: "")
+        let collectionVC:HRCollectionViewController = HRCollectionViewController.init()
+        self.presentViewController(collectionVC, animated: true) { () -> Void in
+            
+        }
     }
     
     func getScreenSize()->CGSize{
