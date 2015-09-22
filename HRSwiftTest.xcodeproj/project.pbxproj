@@ -15,9 +15,9 @@
 		7E17BA681BA2AB70009A60E3 /* HRCustomTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E17BA671BA2AB70009A60E3 /* HRCustomTableCell.swift */; settings = {ASSET_TAGS = (); }; };
 		7E2AA25C1BADAC0000695357 /* HRCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2AA25B1BADAC0000695357 /* HRCollectionViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		7E2AA25E1BADB8A400695357 /* HRBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2AA25D1BADB8A400695357 /* HRBaseViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		7E2AA2601BAE751B00695357 /* HRBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2AA25F1BAE751B00695357 /* HRBaseModel.swift */; settings = {ASSET_TAGS = (); }; };
-		7E2AA2621BAE783E00695357 /* HRSelectItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2AA2611BAE783E00695357 /* HRSelectItem.swift */; settings = {ASSET_TAGS = (); }; };
-		7E39773B1BB14062008415C3 /* HRTestItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39773A1BB14062008415C3 /* HRTestItem.swift */; settings = {ASSET_TAGS = (); }; };
+		7E3977431BB14892008415C3 /* HRBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3977411BB14892008415C3 /* HRBaseModel.swift */; settings = {ASSET_TAGS = (); }; };
+		7E3977441BB14892008415C3 /* HRTestItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3977421BB14892008415C3 /* HRTestItem.swift */; settings = {ASSET_TAGS = (); }; };
+		7E3977481BB14965008415C3 /* HRApiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3977471BB14965008415C3 /* HRApiClient.m */; settings = {ASSET_TAGS = (); }; };
 		C2FE138480B1B88E3B0546D3 /* Pods_HRSwiftTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7908C3E4CB259C95AACA65AC /* Pods_HRSwiftTest.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -34,10 +34,11 @@
 		7E17BA671BA2AB70009A60E3 /* HRCustomTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRCustomTableCell.swift; sourceTree = "<group>"; };
 		7E2AA25B1BADAC0000695357 /* HRCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRCollectionViewController.swift; sourceTree = "<group>"; };
 		7E2AA25D1BADB8A400695357 /* HRBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRBaseViewController.swift; sourceTree = "<group>"; };
-		7E2AA25F1BAE751B00695357 /* HRBaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRBaseModel.swift; sourceTree = "<group>"; };
-		7E2AA2611BAE783E00695357 /* HRSelectItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRSelectItem.swift; sourceTree = "<group>"; };
-		7E39773A1BB14062008415C3 /* HRTestItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRTestItem.swift; sourceTree = "<group>"; };
 		7E39773C1BB14498008415C3 /* HRSwiftTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HRSwiftTest-Bridging-Header.h"; sourceTree = "<group>"; };
+		7E3977411BB14892008415C3 /* HRBaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRBaseModel.swift; sourceTree = "<group>"; };
+		7E3977421BB14892008415C3 /* HRTestItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRTestItem.swift; sourceTree = "<group>"; };
+		7E3977461BB14965008415C3 /* HRApiClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRApiClient.h; sourceTree = "<group>"; };
+		7E3977471BB14965008415C3 /* HRApiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRApiClient.m; sourceTree = "<group>"; };
 		FCE64E82B31CF5FF0A116824 /* Pods-HRSwiftTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HRSwiftTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HRSwiftTest/Pods-HRSwiftTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,6 +92,8 @@
 		7E17BA541BA2A40C009A60E3 /* HRSwiftTest */ = {
 			isa = PBXGroup;
 			children = (
+				7E3977451BB1492F008415C3 /* RequestManager */,
+				7E3977401BB14892008415C3 /* Models */,
 				7E2AA25D1BADB8A400695357 /* HRBaseViewController.swift */,
 				7E17BA551BA2A40C009A60E3 /* AppDelegate.swift */,
 				7E17BA571BA2A40C009A60E3 /* ViewController.swift */,
@@ -100,12 +103,28 @@
 				7E17BA611BA2A40C009A60E3 /* Info.plist */,
 				7E17BA671BA2AB70009A60E3 /* HRCustomTableCell.swift */,
 				7E2AA25B1BADAC0000695357 /* HRCollectionViewController.swift */,
-				7E2AA25F1BAE751B00695357 /* HRBaseModel.swift */,
-				7E2AA2611BAE783E00695357 /* HRSelectItem.swift */,
-				7E39773A1BB14062008415C3 /* HRTestItem.swift */,
 				7E39773C1BB14498008415C3 /* HRSwiftTest-Bridging-Header.h */,
 			);
 			path = HRSwiftTest;
+			sourceTree = "<group>";
+		};
+		7E3977401BB14892008415C3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7E3977411BB14892008415C3 /* HRBaseModel.swift */,
+				7E3977421BB14892008415C3 /* HRTestItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7E3977451BB1492F008415C3 /* RequestManager */ = {
+			isa = PBXGroup;
+			children = (
+				7E3977461BB14965008415C3 /* HRApiClient.h */,
+				7E3977471BB14965008415C3 /* HRApiClient.m */,
+			);
+			name = RequestManager;
+			path = APIClient;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,11 +253,11 @@
 			files = (
 				7E2AA25C1BADAC0000695357 /* HRCollectionViewController.swift in Sources */,
 				7E2AA25E1BADB8A400695357 /* HRBaseViewController.swift in Sources */,
-				7E2AA2621BAE783E00695357 /* HRSelectItem.swift in Sources */,
 				7E17BA581BA2A40C009A60E3 /* ViewController.swift in Sources */,
-				7E39773B1BB14062008415C3 /* HRTestItem.swift in Sources */,
+				7E3977481BB14965008415C3 /* HRApiClient.m in Sources */,
 				7E17BA681BA2AB70009A60E3 /* HRCustomTableCell.swift in Sources */,
-				7E2AA2601BAE751B00695357 /* HRBaseModel.swift in Sources */,
+				7E3977431BB14892008415C3 /* HRBaseModel.swift in Sources */,
+				7E3977441BB14892008415C3 /* HRTestItem.swift in Sources */,
 				7E17BA561BA2A40C009A60E3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

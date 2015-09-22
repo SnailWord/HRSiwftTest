@@ -30,20 +30,9 @@ class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegat
         table.delegate = self
         table.dataSource = self
         table.separatorStyle = UITableViewCellSeparatorStyle.None
-        
         table.registerClass(HRCustomTableCell.classForCoder(), forCellReuseIdentifier: "myCell")
         
-//        Alamofire.request(.POST, "http://121.40.189.170:8081/apis/login", parameters: ["lname": "18602716460","lpwd":"123456"])
-//            .response { request, response, data, error in
-//                do {
-//                    let object:AnyObject! = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)
-//                    print(object)
-//                } catch let aError as NSError {
-//                    if error != nil {
-//                        print(aError)
-//                    }
-//                }
-//        }
+        
         Alamofire.request(.GET, "http://zstest.aliapp.com/API/getSceneList",parameters:nil).response{request, response, data, error in
             do {
                 let object:AnyObject! = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)
@@ -62,24 +51,6 @@ class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegat
                 }
             }
         }
-        
-//        Alamofire.request(.GET, "http://121.40.189.170:8081/apis/getprotype", parameters: ["pid":"1"]).response{request, response, data, error in
-//            print(request)
-//            let array:NSMutableArray = [].mutableCopy() as! NSMutableArray
-//            do {
-//                let object:AnyObject! = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)
-//                let count = object.objectForKey("types")!.count
-//                for(var i = 0; i < count;i++){
-//                    let dicObj:NSDictionary = object.objectForKey("types")!.objectAtIndex(i) as! NSDictionary
-//                    let item:HRSelectItem! = HRSelectItem.init(dicObj as! Dictionary<String, AnyObject>)
-//                    array.addObject(item)
-//                }
-//            } catch let aError as NSError {
-//                if error != nil {
-//                    print(aError)
-//                }
-//            }
-//        }
     }
 
     override func didReceiveMemoryWarning() {
