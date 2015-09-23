@@ -4,3 +4,4 @@
 
 #import <SDWebimage/UIImageView+WebCache.h>
 #import <AFNetworking/AFNetworking.h>
+#import "HRApiClient.h"

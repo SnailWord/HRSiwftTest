@@ -32,11 +32,19 @@ class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegat
         table.separatorStyle = UITableViewCellSeparatorStyle.None
         table.registerClass(HRCustomTableCell.classForCoder(), forCellReuseIdentifier: "myCell")
         
+        //OC Swift混编使用OC的AFNetwork进行数据请求
+        let client:HRApiClient = HRApiClient.client()! as! HRApiClient
+        client.getPath("http://zstest.aliapp.com/API/getSceneList", parameters: nil) { (task, responseDic, error) -> Void in
+            print("AF",NSDate.init())
+            print(responseDic)
+        }
         
+        //新的Almofire swift框架进行请求
         Alamofire.request(.GET, "http://zstest.aliapp.com/API/getSceneList",parameters:nil).response{request, response, data, error in
+            print("Swift",NSDate.init())
             do {
                 let object:AnyObject! = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)
-                print(object["InfoList"])
+                //print(object["InfoList"])
                 let count = object.objectForKey("InfoList")!.count
                 for(var i = 0; i < count;i++){
                     let itemDic:NSDictionary = (object["InfoList"] as! NSArray)[i] as! NSDictionary;
@@ -60,7 +68,8 @@ class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegat
 
     func doSomeThing(){
         let collectionVC:HRCollectionViewController = HRCollectionViewController.init()
-        self.presentViewController(collectionVC, animated: true) { () -> Void in
+        let naVC:UINavigationController = UINavigationController.init(rootViewController: collectionVC)
+        self.presentViewController(naVC, animated: true) { () -> Void in
             
         }
     }
