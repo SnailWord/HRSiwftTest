@@ -67,7 +67,7 @@ static HRApiClient    *_oneClient = nil;
  *
  *  @return
  */
--(NSURLSessionTask *)getPath:(NSString *)aPath parameters:(id)parameters completion:(ApiCompletion)aCompletion{
+-(NSURLSessionTask *)getPath:(NSString *)aPath parameters:(NSMutableDictionary *)parameters completion:(ApiCompletion)aCompletion{
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     NSArray *keys = [(NSMutableDictionary*)parameters allKeys];
     for(id key in keys){
@@ -101,10 +101,18 @@ static HRApiClient    *_oneClient = nil;
     }];
 }
 
-/*
- 基本post方法
+/**
+ *  @author Henry
+ *
+ *  基本post方法
+ *
+ *  @param aPath       路径
+ *  @param parameters  字典参数
+ *  @param aCompletion 完成回调
+ *
+ *  @return sessionTask
  */
--(NSURLSessionDataTask *)postPath:(NSString *)aPath parameters:(id)parameters completion:(ApiCompletion)aCompletion {
+-(NSURLSessionDataTask *)postPath:(NSString *)aPath parameters:(NSMutableDictionary *)parameters completion:(ApiCompletion)aCompletion {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     NSArray *keys = [(NSMutableDictionary *)parameters allKeys];
     

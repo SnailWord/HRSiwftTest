@@ -8,34 +8,29 @@
 
 import UIKit
 import Alamofire
+import SVProgressHUD
 
 class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegate{
     var list:NSMutableArray?
+    var table:UITableView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
-        list = NSMutableArray.init(array: []) as NSMutableArray
+        if list?.count > 0{
+            return
+        }
         
-        let btn:UIButton = UIButton(type: UIButtonType.RoundedRect)
-        btn.frame = CGRectMake(20, 60, 60, 30)
-        btn.setTitle("presentView", forState: UIControlState.Normal)
-        btn.backgroundColor = UIColor.redColor()
-        btn.addTarget(self, action: NSSelectorFromString("doSomeThing"), forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(btn)
-        
-        let table:UITableView = UITableView(frame: CGRectMake(0, 90, self.getScreenSize().width, self.getScreenSize().height-90), style: UITableViewStyle.Plain)
-        self.view.addSubview(table)
-        table.delegate = self
-        table.dataSource = self
-        table.separatorStyle = UITableViewCellSeparatorStyle.None
-        table.registerClass(HRCustomTableCell.classForCoder(), forCellReuseIdentifier: "myCell")
+        SVProgressHUD.showWithStatus("Submitting...", maskType: SVProgressHUDMaskType.Black)
         
         //OC Swift混编使用OC的AFNetwork进行数据请求
         let client:HRApiClient = HRApiClient.client()! as! HRApiClient
-        client.getPath("http://zstest.aliapp.com/API/getSceneList", parameters: nil) { (task, responseDic, error) -> Void in
-            print("AF",NSDate.init())
+        //        client.getPath("http://zstest.aliapp.com/API/getSceneList", parameters: nil) { (task, responseDic, error) -> Void in
+        //            print("AF",NSDate.init())
+        //            print(responseDic)
+        //        }
+        
+        client.postPath("http://www.tongdaohui.com/index.php?app=home&mod=AppApi&act=doAppLogin", parameters: ["email":"henryzhangios@me.com","password":"Zh251314"] as NSMutableDictionary) { (task, responseDic, error) -> Void in
             print(responseDic)
         }
         
@@ -51,14 +46,35 @@ class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegat
                     let item:HRTestItem = HRTestItem.init(itemDic as! Dictionary<String, AnyObject>)
                     self.list!.addObject(item)
                 }
-                
-                table.reloadData()
+                self.table.reloadData()
+                SVProgressHUD.dismiss()
             } catch let aError as NSError {
                 if error != nil {
                     print(aError)
                 }
             }
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        
+        list = NSMutableArray.init(array: []) as NSMutableArray
+        
+        let btn:UIButton = UIButton(type: UIButtonType.RoundedRect)
+        btn.frame = CGRectMake(20, 60, 60, 30)
+        btn.setTitle("presentView", forState: UIControlState.Normal)
+        btn.backgroundColor = UIColor.redColor()
+        btn.addTarget(self, action: NSSelectorFromString("doSomeThing"), forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(btn)
+        
+        table = UITableView(frame: CGRectMake(0, 90, self.getScreenSize().width, self.getScreenSize().height-90), style: UITableViewStyle.Plain)
+        self.view.addSubview(table!)
+        table.delegate = self
+        table.dataSource = self
+        table.separatorStyle = UITableViewCellSeparatorStyle.None
+        table.registerClass(HRCustomTableCell.classForCoder(), forCellReuseIdentifier: "myCell")
     }
 
     override func didReceiveMemoryWarning() {

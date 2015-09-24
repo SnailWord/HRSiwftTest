@@ -24,7 +24,7 @@ typedef void(^ApiCompletion)(NSURLSessionDataTask *task, NSDictionary *responseD
  *
  *  @return
  */
--(NSURLSessionTask *)getPath:(NSString *)aPath parameters:(id)parameters completion:(ApiCompletion)aCompletion;
+-(NSURLSessionTask *)getPath:(NSString *)aPath parameters:(NSMutableDictionary *)parameters completion:(ApiCompletion)aCompletion;
 
 /**
  *  @author Henry
@@ -37,6 +37,6 @@ typedef void(^ApiCompletion)(NSURLSessionDataTask *task, NSDictionary *responseD
  *
  *  @return sessionTask
  */
--(NSURLSessionDataTask *)postPath:(NSString *)aPath parameters:(id)parameters completion:(ApiCompletion)aCompletion;
+-(NSURLSessionDataTask *)postPath:(NSString *)aPath parameters:(NSMutableDictionary *)parameters completion:(ApiCompletion)aCompletion;
 
 @end

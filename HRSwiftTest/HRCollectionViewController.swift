@@ -15,6 +15,8 @@ class HRCollectionViewController: UIViewController,UICollectionViewDataSource,UI
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(title: "返回", style: UIBarButtonItemStyle.Plain, target: self, action: Selector.init("backLast"))
+        
         self.view.backgroundColor = UIColor.whiteColor()
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing=0;
@@ -32,6 +34,17 @@ class HRCollectionViewController: UIViewController,UICollectionViewDataSource,UI
         collection.snp_makeConstraints { (make) -> Void in
             make.edges.equalTo(self.view)
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
+    func backLast(){
+        self.navigationController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+            
+        })
     }
 
     override func didReceiveMemoryWarning() {
