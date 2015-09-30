@@ -5,4 +5,5 @@
 #import <SDWebimage/UIImageView+WebCache.h>
 #import <AFNetworking/AFNetworking.h>
 #import "HRApiClient.h"
+#import "HRLocationPicker.h"
 #import <SVProgressHUD/SVProgressHUD.h>

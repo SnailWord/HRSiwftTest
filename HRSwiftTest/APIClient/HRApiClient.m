@@ -30,7 +30,7 @@ static HRApiClient    *_oneClient = nil;
 /*
  兼容iOS7/8的上传方法
  */
--(NSURLSessionDataTask *)postPathForUpload:(NSString *)fullUrl andParameters:(NSDictionary *)paremeters andData:(NSData *)data withNames:(NSString *)name completion:(ApiCompletion)aCompletion{
+-(NSURLSessionDataTask *)postPathForUpload:(NSString *)fullUrl andParameters:(NSDictionary *)paremeters andData:(NSData *)data withNames:(NSString *)name completion:(ApiCompletion)aCompletion andProgress:(UploadProgress)progress{
     
     NSURLSessionDataTask *task = [NSURLSessionDataTask new];
     
@@ -38,7 +38,7 @@ static HRApiClient    *_oneClient = nil;
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = self.responseSerializer.acceptableContentTypes;
     
-    [manager POST:fullUrl parameters:paremeters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    AFHTTPRequestOperation *operation = [manager POST:fullUrl parameters:paremeters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData:data name:@"file" fileName:name mimeType:@"image/jpeg"];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -52,6 +52,16 @@ static HRApiClient    *_oneClient = nil;
         if(aCompletion)
             aCompletion(task,nil,anError);
     }];
+    
+    //上传进度
+    [operation setUploadProgressBlock:^(NSUInteger __unused bytesWritten,
+                                        long long totalBytesWritten,
+                                        long long totalBytesExpectedToWrite) {
+        if(progress){
+            progress(totalBytesWritten,totalBytesExpectedToWrite);
+        }
+    }];
+    [operation start];
     
     return task;
 }

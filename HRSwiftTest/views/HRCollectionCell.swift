@@ -35,29 +35,29 @@ class HRCollectionCell: UICollectionViewCell {
         
         avator = UIImageView.init()
         avator.backgroundColor = UIColor.greenColor()
-        avator.layer.cornerRadius = 40
+        avator.layer.cornerRadius = 30
         avator.contentMode = UIViewContentMode.ScaleAspectFill
         avator.clipsToBounds = true
-        avator.layer.borderColor = UIColor.yellowColor().CGColor
+        avator.layer.borderColor = UIColor.redColor().CGColor
         avator.layer.borderWidth = 1
         self.contentView.addSubview(avator)
         avator.snp_makeConstraints { (make) -> Void in
             make.left.equalTo(self.contentView.snp_left).offset(10)
             make.bottom.equalTo(self.contentView.snp_bottom).offset(-10)
-            make.height.equalTo(80)
-            make.width.equalTo(80)
+            make.height.equalTo(60)
+            make.width.equalTo(60)
         }
         avator.sd_setImageWithURL(NSURL.init(string: "http://pic74.nipic.com/file/20150803/21060976_140137957001_2.jpg"))
         
         title = UILabel.init()
         title.text = "标签测试"
-        title.textColor = UIColor.whiteColor()
+        title.textColor = UIColor.yellowColor()
         self.contentView.addSubview(title)
         title.snp_makeConstraints { (make) -> Void in
             make.left.equalTo(avator.snp_right).offset(10)
-            make.top.equalTo(avator.snp_top)
+            make.centerY.equalTo(avator.snp_centerY)
             make.right.equalTo(self.contentView.snp_right).offset(-10)
-            make.height.equalTo(20)
+            make.height.equalTo(15)
         }
     }
 }

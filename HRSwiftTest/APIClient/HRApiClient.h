@@ -9,6 +9,8 @@
 #import <AFNetworking/AFNetworking.h>
 
 typedef void(^ApiCompletion)(NSURLSessionDataTask *task, NSDictionary *responseDic, NSError* anError);
+typedef void (^UploadProgress)(long long sent, long long expectSend);
+
 @interface HRApiClient : AFHTTPSessionManager
 
 +(id)client;

@@ -6,12 +6,15 @@
 //  Copyright © 2015年 ZhangHeng. All rights reserved.
 //
 
+//24 122 180
+
 import UIKit
 import Alamofire
 import SVProgressHUD
 
 class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegate{
     var list:NSMutableArray?
+    var items:NSMutableArray?
     var table:UITableView!
     
     override func viewDidAppear(animated: Bool) {
@@ -25,14 +28,10 @@ class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegat
         
         //OC Swift混编使用OC的AFNetwork进行数据请求
         let client:HRApiClient = HRApiClient.client()! as! HRApiClient
-        //        client.getPath("http://zstest.aliapp.com/API/getSceneList", parameters: nil) { (task, responseDic, error) -> Void in
-        //            print("AF",NSDate.init())
-        //            print(responseDic)
-        //        }
-        
-        client.postPath("http://www.tongdaohui.com/index.php?app=home&mod=AppApi&act=doAppLogin", parameters: ["email":"henryzhangios@me.com","password":"Zh251314"] as NSMutableDictionary) { (task, responseDic, error) -> Void in
-            print(responseDic)
-        }
+                client.getPath("http://zstest.aliapp.com/API/getSceneList", parameters: nil) { (task, responseDic, error) -> Void in
+                    print("AF",NSDate.init())
+                    print(responseDic)
+                }
         
         //新的Almofire swift框架进行请求
         Alamofire.request(.GET, "http://zstest.aliapp.com/API/getSceneList",parameters:nil).response{request, response, data, error in
@@ -83,9 +82,15 @@ class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegat
     }
 
     func doSomeThing(){
-        let collectionVC:HRCollectionViewController = HRCollectionViewController.init()
-        let naVC:UINavigationController = UINavigationController.init(rootViewController: collectionVC)
-        self.presentViewController(naVC, animated: true) { () -> Void in
+//        let collectionVC:HRCollectionViewController = HRCollectionViewController.init()
+//        let naVC:UINavigationController = UINavigationController.init(rootViewController: collectionVC)
+//        self.presentViewController(naVC, animated: true) { () -> Void in
+//            
+//        }
+        
+        let user:HRPersonalViewController = HRPersonalViewController.init()
+        let nav:UINavigationController = UINavigationController.init(rootViewController: user)
+        self.presentViewController(nav, animated: true) { () -> Void in
             
         }
     }
@@ -117,6 +122,22 @@ class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegat
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        return UITableViewCellEditingStyle.Delete
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if(editingStyle == UITableViewCellEditingStyle.Delete){
+            print("删除")
+            self.list?.removeObjectAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        }
     }
 }
 

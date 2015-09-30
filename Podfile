@@ -11,7 +11,7 @@ pod 'SnapKit', '~> 0.14.0'
 pod 'Alamofire', '~> 2.0.1'
 pod 'AFNetworking', '~> 2.5.4'
 #pod 'Masonry', '~> 0.6.2'
-#pod 'FMDB', '~> 2.5'
+pod 'FMDB', '~> 2.5'
 pod 'SVProgressHUD', '~> 1.1.3'
 pod 'SDWebImage', '~> 3.7.2'
 
