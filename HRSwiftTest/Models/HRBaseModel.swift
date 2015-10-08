@@ -9,16 +9,16 @@
 import UIKit
 
 class HRBaseModel: NSObject {
-    internal convenience init(_ dictionary: Dictionary<String, AnyObject>) {
-        self.init()
+    init(dictionary:NSDictionary){
+        super.init()
         for(key, value) in dictionary{
-            self.setValue(value, forKeyPath: key)
+            self.setValue(value, forKeyPath: key as! String)
             //print(value,key)
         }
-        
     }
     
     override func setValue(value: AnyObject?, forUndefinedKey key: String) {
-        print("未实现key",key,"的编写")
+        let className:NSString = NSStringFromClass(self.classForCoder)
+        print("类",className,"未实现key",key,"的编写")
     }
 }

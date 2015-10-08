@@ -8,7 +8,7 @@
 
 #import <AFNetworking/AFNetworking.h>
 
-typedef void(^ApiCompletion)(NSURLSessionDataTask *task, NSDictionary *responseDic, NSError* anError);
+typedef void(^ApiCompletion)(NSURLSessionDataTask *task, id responseDic, NSError* anError);
 typedef void (^UploadProgress)(long long sent, long long expectSend);
 
 @interface HRApiClient : AFHTTPSessionManager
@@ -26,7 +26,7 @@ typedef void (^UploadProgress)(long long sent, long long expectSend);
  *
  *  @return
  */
--(NSURLSessionTask *)getPath:(NSString *)aPath parameters:(NSMutableDictionary *)parameters completion:(ApiCompletion)aCompletion;
+-(NSURLSessionDataTask *)getPath:(NSString *)aPath parameters:(NSMutableDictionary *)parameters completion:(ApiCompletion)aCompletion;
 
 /**
  *  @author Henry
@@ -41,4 +41,54 @@ typedef void (^UploadProgress)(long long sent, long long expectSend);
  */
 -(NSURLSessionDataTask *)postPath:(NSString *)aPath parameters:(NSMutableDictionary *)parameters completion:(ApiCompletion)aCompletion;
 
+
+
+#pragma mark- test interface
+/**
+ *  @author Henry
+ *
+ *  获取首页梦想秀列表
+ *
+ *  @param completion completion description
+ *
+ *  @return return value description
+ */
+-(NSURLSessionDataTask *)getHomePageDreamWithCompletion:(ApiCompletion)completion;
+
+/**
+ *  @author Henry
+ *
+ *  获取首页banner列表
+ *
+ *  @param completion completion description
+ *
+ *  @return     
+ */
+-(NSURLSessionDataTask *)getHomePageBanner:(ApiCompletion)completion;
+
+/**
+ *  @author Henry
+ *
+ *  获取首页热门星榜
+ *
+ *  @param completion completion description
+ *
+ *  @return return value description
+ */
+-(NSURLSessionDataTask *)getHomePageHotStar:(ApiCompletion)completion;
+
+/**
+ *  @author Henry
+ *
+ *  首页collectionView数据
+ *
+ *  @param page         页数
+ *  @param numberOfPage 每页个数
+ *  @param completion   完成回调
+ *
+ *  @return 
+ */
+-(NSURLSessionDataTask *)getAllTalksByPage:(int)page
+                                andPerPage:(int)numberOfPage
+                                completion:(ApiCompletion)completion;
 @end

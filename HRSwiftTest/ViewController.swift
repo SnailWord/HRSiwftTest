@@ -12,7 +12,7 @@ import UIKit
 import Alamofire
 import SVProgressHUD
 
-class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegate{
+class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate{
     var list:NSMutableArray?
     var items:NSMutableArray?
     var table:UITableView!
@@ -24,34 +24,23 @@ class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegat
             return
         }
         
-        SVProgressHUD.showWithStatus("Submitting...", maskType: SVProgressHUDMaskType.Black)
+        SVProgressHUD.showWithStatus("请稍后...", maskType: SVProgressHUDMaskType.Black)
         
         //OC Swift混编使用OC的AFNetwork进行数据请求
         let client:HRApiClient = HRApiClient.client()! as! HRApiClient
-                client.getPath("http://zstest.aliapp.com/API/getSceneList", parameters: nil) { (task, responseDic, error) -> Void in
-                    print("AF",NSDate.init())
-                    print(responseDic)
-                }
-        
-        //新的Almofire swift框架进行请求
-        Alamofire.request(.GET, "http://zstest.aliapp.com/API/getSceneList",parameters:nil).response{request, response, data, error in
-            print("Swift",NSDate.init())
-            do {
-                let object:AnyObject! = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)
-                //print(object["InfoList"])
-                let count = object.objectForKey("InfoList")!.count
+        client.getHomePageDreamWithCompletion { (task, responseDic, error) -> Void in
+            print(responseDic)
+            if(responseDic.isKindOfClass(NSArray.classForCoder())){
+                let count = (responseDic as! NSArray).count
                 for(var i = 0; i < count;i++){
-                    let itemDic:NSDictionary = (object["InfoList"] as! NSArray)[i] as! NSDictionary;
-                    let item:HRTestItem = HRTestItem.init(itemDic as! Dictionary<String, AnyObject>)
-                    self.list!.addObject(item)
+                    let itemDic:NSDictionary = responseDic.objectAtIndex(i) as! NSDictionary
+                    let dreamItem:HRDreamItem = HRDreamItem.init(dictionary: itemDic as! Dictionary<String, AnyObject>)
+                    self.list!.addObject(dreamItem)
                 }
                 self.table.reloadData()
-                SVProgressHUD.dismiss()
-            } catch let aError as NSError {
-                if error != nil {
-                    print(aError)
-                }
             }
+            
+            SVProgressHUD.dismiss()
         }
     }
     
@@ -70,6 +59,7 @@ class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegat
         
         table = UITableView(frame: CGRectMake(0, 90, self.getScreenSize().width, self.getScreenSize().height-90), style: UITableViewStyle.Plain)
         self.view.addSubview(table!)
+        table.separatorStyle = UITableViewCellSeparatorStyle.None
         table.delegate = self
         table.dataSource = self
         table.separatorStyle = UITableViewCellSeparatorStyle.None
@@ -82,12 +72,6 @@ class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegat
     }
 
     func doSomeThing(){
-//        let collectionVC:HRCollectionViewController = HRCollectionViewController.init()
-//        let naVC:UINavigationController = UINavigationController.init(rootViewController: collectionVC)
-//        self.presentViewController(naVC, animated: true) { () -> Void in
-//            
-//        }
-        
         let user:HRPersonalViewController = HRPersonalViewController.init()
         let nav:UINavigationController = UINavigationController.init(rootViewController: user)
         self.presentViewController(nav, animated: true) { () -> Void in
@@ -102,18 +86,19 @@ class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegat
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:HRCustomTableCell = tableView.dequeueReusableCellWithIdentifier("myCell") as! HRCustomTableCell
         
-        let item:HRTestItem = (self.list?.objectAtIndex(indexPath.row))! as! HRTestItem
+        let item:HRDreamItem = (self.list?.objectAtIndex(indexPath.row))! as! HRDreamItem
         
-        cell.title?.text = item.SceneName as? String
-        cell.iconImage.sd_setImageWithURL(NSURL.init(string: item.DesignerPicSrc! as String))
-        cell.sign.text = item.DesignerPicSrc as? String
+        cell.title?.text = item.fundingText as? String
+        cell.bgImage.sd_setImageWithURL(NSURL.init(string: item.logo! as String))
+        cell.iconImage.sd_setImageWithURL(NSURL.init(string: item.fundingUrl! as String))
+        cell.sign.text = item.nick as? String
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return cell
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 60
+        return 215
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -132,12 +117,24 @@ class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegat
         return UITableViewCellEditingStyle.Delete
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if(editingStyle == UITableViewCellEditingStyle.Delete){
-            print("删除")
-            self.list?.removeObjectAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let collection:HRCollectionViewController = HRCollectionViewController.init()
+        let nav:UINavigationController = UINavigationController.init(rootViewController: collection)
+        self.presentViewController(nav, animated: true) { () -> Void in
+            
         }
+
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let cells:NSArray = self.table.visibleCells
+        for cell in cells{
+            let yOffset:CGFloat = ((self.table.contentOffset.y - cell.frame.origin.y) / 238) * 20
+            let frame:CGRect = (cell as! HRCustomTableCell).bgImage.bounds;
+            let offsetFrame:CGRect = CGRectOffset(frame, 0, yOffset);
+             (cell as! HRCustomTableCell).bgImage.frame = offsetFrame;
+        }
+        
     }
 }
 

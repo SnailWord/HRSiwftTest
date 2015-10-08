@@ -10,8 +10,12 @@
 #import <AFNetworking/AFNetworkReachabilityManager.h>
 #import "AFHTTPRequestOperationManager.h"
 #import <CommonCrypto/CommonDigest.h>
+#import <RNCryptor/RNEncryptor.h>
 
-#define SERVER_URL @""
+#define SERVER_URL @"http://dwintf.moko.io:9050"
+
+#define MOKO_APP_KEY    @"iosappid"
+#define MOKO_APP_SECRET @"ddeerrff"
 
 static HRApiClient    *_oneClient = nil;
 @implementation HRApiClient
@@ -25,6 +29,33 @@ static HRApiClient    *_oneClient = nil;
     });
     
     return _oneClient;
+}
+
+-(void)buildAuthHeaderForRequest:(NSMutableURLRequest **)request appkey:(NSString *)appkey secret:(NSString *)secret udid:(NSString *)udid user:(NSString *)user
+{
+    NSMutableURLRequest *rq = *request;
+    NSString *uri = rq.URL.relativePath;
+    [rq setValue:[self buildAuthForUri:uri appkey:appkey secret:secret udid:udid user:user] forHTTPHeaderField:@"X-MOKO-AUTH"];
+    [rq setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+}
+
+-(NSString *)buildAuthForUri:(NSString *)uri appkey:(NSString *)appkey secret:(NSString *)secret udid:(NSString *)udid user:(NSString *)user
+{
+    if (user==nil) {
+        user=@"";
+    }
+    NSDictionary *authdic = @{@"uri":uri,@"udid":udid,@"user":user};
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:authdic options:NSJSONWritingPrettyPrinted error:nil];
+    
+    NSError *error;
+    NSData *encryptedData = [RNEncryptor encryptData:jsonData withSettings:kRNCryptorAES256Settings password:secret error:&error];
+    if (error) {
+        NSLog(@"ERROR:%@",error);
+    }
+    
+    NSString *safe_hmac = [encryptedData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    NSString *headerValue = [appkey stringByAppendingFormat:@":%@",safe_hmac];
+    return headerValue;
 }
 
 /*
@@ -77,13 +108,9 @@ static HRApiClient    *_oneClient = nil;
  *
  *  @return
  */
--(NSURLSessionTask *)getPath:(NSString *)aPath parameters:(NSMutableDictionary *)parameters completion:(ApiCompletion)aCompletion{
+-(NSURLSessionDataTask *)getPath:(NSString *)aPath parameters:(NSMutableDictionary *)parameters completion:(ApiCompletion)aCompletion{
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    NSArray *keys = [(NSMutableDictionary*)parameters allKeys];
-    for(id key in keys){
-        if([[parameters objectForKey:key] isKindOfClass:[NSString class]])
-            [parameters setObject:[self getEncodeString:[parameters objectForKey:key]] forKey:key];
-    }
+    [self.requestSerializer setValue:[self buildAuthForUri:[@"/" stringByAppendingString:aPath] appkey:MOKO_APP_KEY secret:MOKO_APP_SECRET udid:@"761D9908-B207-4183-8F5C-A8A615D6CF13" user:@"1978383"] forHTTPHeaderField:@"X-MOKO-AUTH"];
     
     return [self GET:aPath parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         if(aCompletion){
@@ -124,8 +151,8 @@ static HRApiClient    *_oneClient = nil;
  */
 -(NSURLSessionDataTask *)postPath:(NSString *)aPath parameters:(NSMutableDictionary *)parameters completion:(ApiCompletion)aCompletion {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    [self.requestSerializer setValue:[self buildAuthForUri:[@"/" stringByAppendingString:aPath] appkey:MOKO_APP_KEY secret:MOKO_APP_SECRET udid:@"761D9908-B207-4183-8F5C-A8A615D6CF13" user:@"1978383"] forHTTPHeaderField:@"X-MOKO-AUTH"];
     NSArray *keys = [(NSMutableDictionary *)parameters allKeys];
-    
     for(id key in keys){
         if([[parameters objectForKey:key] isKindOfClass:[NSString class]])
             [parameters setObject:[self getEncodeString:[parameters objectForKey:key]] forKey:key];
@@ -182,5 +209,29 @@ static HRApiClient    *_oneClient = nil;
              result[8], result[9], result[10], result[11],
              result[12], result[13], result[14], result[15]
              ] uppercaseString];
+}
+
+-(NSURLSessionDataTask *)getHomePageDreamWithCompletion:(ApiCompletion)completion{
+    NSString *path = @"funding/home/move";
+    return [self getPath:path parameters:nil completion:completion];
+}
+
+-(NSURLSessionDataTask *)getHomePageBanner:(ApiCompletion)completion{
+    NSString *path = @"main/homepaheadvert";
+    return [self getPath:path parameters:nil completion:completion];
+}
+
+-(NSURLSessionDataTask *)getHomePageHotStar:(ApiCompletion)completion{
+    NSString *path = @"ranking/girls/week/move";
+    return [self getPath:path parameters:nil completion:completion];
+}
+
+-(NSURLSessionDataTask *)getAllTalksByPage:(int)page andPerPage:(int)numberOfPage completion:(ApiCompletion)completion{
+    NSString *path = @"talk/move/refresh";
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    [parameters setObject:@(page) forKey:@"page"];
+    [parameters setObject:@(numberOfPage) forKey:@"perpage"];
+    
+    return [self getPath:path parameters:parameters completion:completion];
 }
 @end

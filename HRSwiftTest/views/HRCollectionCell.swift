@@ -31,7 +31,7 @@ class HRCollectionCell: UICollectionViewCell {
         bigBkg.snp_makeConstraints { (make) -> Void in
             make.edges.equalTo(self.contentView)
         }
-        bigBkg.sd_setImageWithURL(NSURL.init(string: "http://pic74.nipic.com/file/20150803/21060976_140137957001_2.jpg"))
+        //bigBkg.sd_setImageWithURL(NSURL.init(string: "http://pic74.nipic.com/file/20150803/21060976_140137957001_2.jpg"))
         
         avator = UIImageView.init()
         avator.backgroundColor = UIColor.greenColor()
@@ -47,10 +47,10 @@ class HRCollectionCell: UICollectionViewCell {
             make.height.equalTo(60)
             make.width.equalTo(60)
         }
-        avator.sd_setImageWithURL(NSURL.init(string: "http://pic74.nipic.com/file/20150803/21060976_140137957001_2.jpg"))
+        //avator.sd_setImageWithURL(NSURL.init(string: "http://pic74.nipic.com/file/20150803/21060976_140137957001_2.jpg"))
         
         title = UILabel.init()
-        title.text = "标签测试"
+        //title.text = "标签测试"
         title.textColor = UIColor.yellowColor()
         self.contentView.addSubview(title)
         title.snp_makeConstraints { (make) -> Void in

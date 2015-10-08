@@ -7,14 +7,19 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class HRCollectionViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout{
     
     var collection:UICollectionView!
+    var datas:NSMutableArray!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        datas = NSMutableArray.init(array: []) as NSMutableArray
+        
+        
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(title: "返回", style: UIBarButtonItemStyle.Plain, target: self, action: Selector.init("backLast"))
         
         self.view.backgroundColor = UIColor.whiteColor()
@@ -33,6 +38,17 @@ class HRCollectionViewController: UIViewController,UICollectionViewDataSource,UI
         collection.registerClass(HRCollectionCell.classForCoder(), forCellWithReuseIdentifier: "myCollectionCell")
         collection.snp_makeConstraints { (make) -> Void in
             make.edges.equalTo(self.view)
+        }
+        
+        let client:HRApiClient = HRApiClient.client()! as! HRApiClient
+        client.getAllTalksByPage(1, andPerPage: 5) {(task, responseDic, error) -> Void in
+            print(NSStringFromClass(responseDic.classForCoder))
+            for dic in (responseDic as! NSArray){
+                let myDic:NSDictionary = dic as! NSDictionary
+                let work:HRTalkItem  = HRTalkItem.init(dictionary: myDic)
+                self.datas.addObject(work)
+            }
+            self.collection.reloadData()
         }
     }
     
@@ -53,15 +69,20 @@ class HRCollectionViewController: UIViewController,UICollectionViewDataSource,UI
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
+        return self.datas.count
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 17
+        let talks:HRTalkItem = self.datas.objectAtIndex(section) as! HRTalkItem
+        return (talks.detailMovement?.count)!
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let item:HRTalkItemDetail = (self.datas.objectAtIndex(indexPath.section) as! HRTalkItem).detailMovement?.objectAtIndex(indexPath.row) as! HRTalkItemDetail
         let cell:HRCollectionCell = collectionView.dequeueReusableCellWithReuseIdentifier("myCollectionCell", forIndexPath: indexPath) as! HRCollectionCell
+        cell.avator.sd_setImageWithURL(NSURL.init(string: item.logo! as String))
+        cell.bigBkg.sd_setImageWithURL(NSURL.init(string: item.statusUrl! as String))
+        cell.title.text = self.getPureString(item.text!) as String
         
         return cell
     }
@@ -81,6 +102,19 @@ class HRCollectionViewController: UIViewController,UICollectionViewDataSource,UI
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         print(indexPath.row)
+    }
+    
+//    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+//        let header:UIView = UIView.init(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 40))
+//        
+//        
+//        return header
+//    }
+    
+    func getPureString(oriString:NSString)->NSString{
+        let range:NSRange = oriString.rangeOfString("#", options: NSStringCompareOptions.BackwardsSearch, range: NSMakeRange(0, oriString.length))
+        
+        return oriString.substringFromIndex(range.location+1)
     }
 
     /*
