@@ -62,7 +62,6 @@ class ViewController: UIViewController ,UITableViewDataSource,UITableViewDelegat
         table.separatorStyle = UITableViewCellSeparatorStyle.None
         table.delegate = self
         table.dataSource = self
-        table.separatorStyle = UITableViewCellSeparatorStyle.None
         table.registerClass(HRCustomTableCell.classForCoder(), forCellReuseIdentifier: "myCell")
     }
 
