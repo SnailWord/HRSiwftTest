@@ -36,6 +36,7 @@ class HRCollectionViewController: UIViewController,UICollectionViewDataSource,UI
         collection.delegate = self
         collection.dataSource = self
         collection.registerClass(HRCollectionCell.classForCoder(), forCellWithReuseIdentifier: "myCollectionCell")
+        collection.registerClass(MyTalkCollectionReusableView.classForCoder(), forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: "MyWorkHeader")
         collection.snp_makeConstraints { (make) -> Void in
             make.edges.equalTo(self.view)
         }
@@ -104,12 +105,18 @@ class HRCollectionViewController: UIViewController,UICollectionViewDataSource,UI
         print(indexPath.row)
     }
     
-//    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-//        let header:UIView = UIView.init(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 40))
-//        
-//        
-//        return header
-//    }
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        let header:MyTalkCollectionReusableView = collection.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "MyWorkHeader", forIndexPath: indexPath) as! MyTalkCollectionReusableView
+        let item:HRTalkItem = self.datas.objectAtIndex(indexPath.section) as! HRTalkItem
+        
+        
+        header.title.text = item.talkcontent! as String
+        return header
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSizeMake(UIScreen.mainScreen().bounds.size.width, 40)
+    }
     
     func getPureString(oriString:NSString)->NSString{
         let range:NSRange = oriString.rangeOfString("#", options: NSStringCompareOptions.BackwardsSearch, range: NSMakeRange(0, oriString.length))

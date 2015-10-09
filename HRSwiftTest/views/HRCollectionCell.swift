@@ -51,7 +51,7 @@ class HRCollectionCell: UICollectionViewCell {
         
         title = UILabel.init()
         //title.text = "标签测试"
-        title.textColor = UIColor.yellowColor()
+        title.textColor = UIColor.whiteColor()
         self.contentView.addSubview(title)
         title.snp_makeConstraints { (make) -> Void in
             make.left.equalTo(avator.snp_right).offset(10)

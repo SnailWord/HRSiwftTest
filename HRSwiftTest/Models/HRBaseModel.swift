@@ -11,6 +11,7 @@ import UIKit
 class HRBaseModel: NSObject {
     init(dictionary:NSDictionary){
         super.init()
+        print(dictionary)
         for(key, value) in dictionary{
             self.setValue(value, forKeyPath: key as! String)
             //print(value,key)

@@ -91,4 +91,5 @@ typedef void (^UploadProgress)(long long sent, long long expectSend);
 -(NSURLSessionDataTask *)getAllTalksByPage:(int)page
                                 andPerPage:(int)numberOfPage
                                 completion:(ApiCompletion)completion;
+
 @end

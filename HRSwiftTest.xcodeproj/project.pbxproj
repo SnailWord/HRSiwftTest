@@ -25,6 +25,7 @@
 		7E5474F61BC61A94001AD28D /* HRDreamItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5474F51BC61A94001AD28D /* HRDreamItem.swift */; settings = {ASSET_TAGS = (); }; };
 		7E5474F81BC6649A001AD28D /* HRTalkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5474F71BC6649A001AD28D /* HRTalkItem.swift */; settings = {ASSET_TAGS = (); }; };
 		7E5474FA1BC673EE001AD28D /* HRTalkItemDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5474F91BC673EE001AD28D /* HRTalkItemDetail.swift */; settings = {ASSET_TAGS = (); }; };
+		7E5474FC1BC67BE7001AD28D /* MyTalkCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5474FB1BC67BE7001AD28D /* MyTalkCollectionReusableView.swift */; settings = {ASSET_TAGS = (); }; };
 		7E5FA56A1BBB7913008E4C83 /* HRLocationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FA5661BBB7913008E4C83 /* HRLocationItem.m */; settings = {ASSET_TAGS = (); }; };
 		7E5FA56B1BBB7913008E4C83 /* HRLocationPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FA5681BBB7913008E4C83 /* HRLocationPicker.m */; settings = {ASSET_TAGS = (); }; };
 		7E5FA56C1BBB7913008E4C83 /* location.db in Resources */ = {isa = PBXBuildFile; fileRef = 7E5FA5691BBB7913008E4C83 /* location.db */; settings = {ASSET_TAGS = (); }; };
@@ -56,6 +57,7 @@
 		7E5474F51BC61A94001AD28D /* HRDreamItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRDreamItem.swift; sourceTree = "<group>"; };
 		7E5474F71BC6649A001AD28D /* HRTalkItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRTalkItem.swift; sourceTree = "<group>"; };
 		7E5474F91BC673EE001AD28D /* HRTalkItemDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRTalkItemDetail.swift; sourceTree = "<group>"; };
+		7E5474FB1BC67BE7001AD28D /* MyTalkCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTalkCollectionReusableView.swift; sourceTree = "<group>"; };
 		7E5FA5651BBB7913008E4C83 /* HRLocationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRLocationItem.h; sourceTree = "<group>"; };
 		7E5FA5661BBB7913008E4C83 /* HRLocationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRLocationItem.m; sourceTree = "<group>"; };
 		7E5FA5671BBB7913008E4C83 /* HRLocationPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRLocationPicker.h; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				7E3977501BB16102008415C3 /* HRCollectionCell.swift */,
 				7E17BA671BA2AB70009A60E3 /* HRCustomTableCell.swift */,
 				7E0DB5341BBA8E1C0081300F /* HRPersonalCell.swift */,
+				7E5474FB1BC67BE7001AD28D /* MyTalkCollectionReusableView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				7E17BA681BA2AB70009A60E3 /* HRCustomTableCell.swift in Sources */,
 				7E5474F61BC61A94001AD28D /* HRDreamItem.swift in Sources */,
 				7E0DB5331BBA8DC90081300F /* HRPersonalViewController.swift in Sources */,
+				7E5474FC1BC67BE7001AD28D /* MyTalkCollectionReusableView.swift in Sources */,
 				7E3977511BB16102008415C3 /* HRCollectionCell.swift in Sources */,
 				7E3977431BB14892008415C3 /* HRBaseModel.swift in Sources */,
 				7E3977441BB14892008415C3 /* HRTestItem.swift in Sources */,
@@ -438,6 +442,7 @@
 			baseConfigurationReference = FCE64E82B31CF5FF0A116824 /* Pods-HRSwiftTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -456,6 +461,7 @@
 			baseConfigurationReference = 6B3C57BD605A034DBF5E1FD1 /* Pods-HRSwiftTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

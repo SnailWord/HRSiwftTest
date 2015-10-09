@@ -14,6 +14,8 @@ class HRTalkItemDetail: HRBaseModel {
     var nickname:NSString?
     var statusUrl:NSString?
     var text:NSString?
+    var type:NSNumber?
+    var statusid:NSNumber?
 }
 
 //girlid = 12776;
