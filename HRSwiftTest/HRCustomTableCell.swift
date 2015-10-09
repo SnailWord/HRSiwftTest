@@ -81,15 +81,5 @@ class HRCustomTableCell: UITableViewCell {
             make.right.equalTo(title.snp_right)
             make.height.equalTo(15)
         }
-        
-//        line = UIView.init()
-//        line.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
-//        self.contentView.addSubview(line)
-//        line.snp_makeConstraints { (make) -> Void in
-//            make.bottom.equalTo(self.contentView.snp_bottom)
-//            make.left.equalTo(self.contentView.snp_left)
-//            make.right.equalTo(self.contentView.snp_right)
-//            make.height.equalTo(0.5)
-//        }
     }
 }

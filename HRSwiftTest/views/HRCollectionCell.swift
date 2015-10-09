@@ -12,6 +12,8 @@ class HRCollectionCell: UICollectionViewCell {
     var avator:UIImageView!
     var title:UILabel!
     var bigBkg:UIImageView!
+    var userName:UILabel!
+    var gradient:HRGradientView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,9 +31,20 @@ class HRCollectionCell: UICollectionViewCell {
         bigBkg.clipsToBounds = true
         self.contentView.addSubview(bigBkg!)
         bigBkg.snp_makeConstraints { (make) -> Void in
-            make.edges.equalTo(self.contentView)
+            make.top.equalTo(self.contentView.snp_top)
+            make.left.equalTo(self.contentView.snp_left)
+            make.right.equalTo(self.contentView.snp_right)
+            make.bottom.equalTo(self.contentView.snp_bottom).offset(-35)
         }
-        //bigBkg.sd_setImageWithURL(NSURL.init(string: "http://pic74.nipic.com/file/20150803/21060976_140137957001_2.jpg"))
+        
+        gradient = HRGradientView.init()
+        self.contentView.addSubview(gradient)
+        gradient.snp_makeConstraints { (make) -> Void in
+            make.left.equalTo(self.contentView.snp_left)
+            make.right.equalTo(self.contentView.snp_right)
+            make.bottom.equalTo(self.contentView.snp_bottom).offset(-30)
+            make.height.equalTo(40)
+        }
         
         avator = UIImageView.init()
         avator.backgroundColor = UIColor.greenColor()
@@ -47,16 +60,26 @@ class HRCollectionCell: UICollectionViewCell {
             make.height.equalTo(60)
             make.width.equalTo(60)
         }
-        //avator.sd_setImageWithURL(NSURL.init(string: "http://pic74.nipic.com/file/20150803/21060976_140137957001_2.jpg"))
+        
+        userName = UILabel.init()
+        userName.textColor = UIColor.whiteColor()
+        userName.font = UIFont.systemFontOfSize(12)
+        self.contentView.addSubview(userName)
+        userName.snp_makeConstraints { (make) -> Void in
+            make.left.equalTo(avator.snp_right).offset(10)
+            make.right.equalTo(self.contentView.snp_right)
+            make.bottom.equalTo(avator.snp_centerY).offset(-5)
+            make.height.equalTo(12)
+        }
         
         title = UILabel.init()
-        //title.text = "标签测试"
-        title.textColor = UIColor.whiteColor()
+        title.textColor = UIColor.blackColor()
+        title.font = UIFont.systemFontOfSize(14)
         self.contentView.addSubview(title)
         title.snp_makeConstraints { (make) -> Void in
             make.left.equalTo(avator.snp_right).offset(10)
-            make.centerY.equalTo(avator.snp_centerY)
-            make.right.equalTo(self.contentView.snp_right).offset(-10)
+            make.top.equalTo(avator.snp_centerY).offset(15)
+            make.right.equalTo(self.contentView.snp_right).offset(-5)
             make.height.equalTo(15)
         }
     }

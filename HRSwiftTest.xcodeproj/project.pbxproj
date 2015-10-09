@@ -26,6 +26,8 @@
 		7E5474F81BC6649A001AD28D /* HRTalkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5474F71BC6649A001AD28D /* HRTalkItem.swift */; settings = {ASSET_TAGS = (); }; };
 		7E5474FA1BC673EE001AD28D /* HRTalkItemDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5474F91BC673EE001AD28D /* HRTalkItemDetail.swift */; settings = {ASSET_TAGS = (); }; };
 		7E5474FC1BC67BE7001AD28D /* MyTalkCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5474FB1BC67BE7001AD28D /* MyTalkCollectionReusableView.swift */; settings = {ASSET_TAGS = (); }; };
+		7E5474FE1BC7883E001AD28D /* HRGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5474FD1BC7883E001AD28D /* HRGradientView.swift */; settings = {ASSET_TAGS = (); }; };
+		7E5475001BC78FED001AD28D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E5474FF1BC78FED001AD28D /* QuartzCore.framework */; };
 		7E5FA56A1BBB7913008E4C83 /* HRLocationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FA5661BBB7913008E4C83 /* HRLocationItem.m */; settings = {ASSET_TAGS = (); }; };
 		7E5FA56B1BBB7913008E4C83 /* HRLocationPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FA5681BBB7913008E4C83 /* HRLocationPicker.m */; settings = {ASSET_TAGS = (); }; };
 		7E5FA56C1BBB7913008E4C83 /* location.db in Resources */ = {isa = PBXBuildFile; fileRef = 7E5FA5691BBB7913008E4C83 /* location.db */; settings = {ASSET_TAGS = (); }; };
@@ -58,6 +60,8 @@
 		7E5474F71BC6649A001AD28D /* HRTalkItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRTalkItem.swift; sourceTree = "<group>"; };
 		7E5474F91BC673EE001AD28D /* HRTalkItemDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRTalkItemDetail.swift; sourceTree = "<group>"; };
 		7E5474FB1BC67BE7001AD28D /* MyTalkCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTalkCollectionReusableView.swift; sourceTree = "<group>"; };
+		7E5474FD1BC7883E001AD28D /* HRGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRGradientView.swift; sourceTree = "<group>"; };
+		7E5474FF1BC78FED001AD28D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7E5FA5651BBB7913008E4C83 /* HRLocationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRLocationItem.h; sourceTree = "<group>"; };
 		7E5FA5661BBB7913008E4C83 /* HRLocationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRLocationItem.m; sourceTree = "<group>"; };
 		7E5FA5671BBB7913008E4C83 /* HRLocationPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRLocationPicker.h; sourceTree = "<group>"; };
@@ -71,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E5475001BC78FED001AD28D /* QuartzCore.framework in Frameworks */,
 				C2FE138480B1B88E3B0546D3 /* Pods_HRSwiftTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,6 +86,7 @@
 		1A9AC11DADEA5BA3B97AC97C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E5474FF1BC78FED001AD28D /* QuartzCore.framework */,
 				7908C3E4CB259C95AACA65AC /* Pods_HRSwiftTest.framework */,
 			);
 			name = Frameworks;
@@ -172,6 +178,7 @@
 				7E17BA671BA2AB70009A60E3 /* HRCustomTableCell.swift */,
 				7E0DB5341BBA8E1C0081300F /* HRPersonalCell.swift */,
 				7E5474FB1BC67BE7001AD28D /* MyTalkCollectionReusableView.swift */,
+				7E5474FD1BC7883E001AD28D /* HRGradientView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -331,6 +338,7 @@
 				7E3977431BB14892008415C3 /* HRBaseModel.swift in Sources */,
 				7E3977441BB14892008415C3 /* HRTestItem.swift in Sources */,
 				7E17BA561BA2A40C009A60E3 /* AppDelegate.swift in Sources */,
+				7E5474FE1BC7883E001AD28D /* HRGradientView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

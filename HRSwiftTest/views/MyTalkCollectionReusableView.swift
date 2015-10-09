@@ -18,6 +18,8 @@ class MyTalkCollectionReusableView: UICollectionReusableView {
         title = UILabel.init(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 40))
         self.addSubview(title)
         title.textAlignment = NSTextAlignment.Center
+        title.layer.borderColor = UIColor.grayColor().CGColor
+        title.layer.borderWidth = 1
     }
 
     required init?(coder aDecoder: NSCoder) {

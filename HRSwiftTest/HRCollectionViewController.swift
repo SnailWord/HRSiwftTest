@@ -84,6 +84,7 @@ class HRCollectionViewController: UIViewController,UICollectionViewDataSource,UI
         cell.avator.sd_setImageWithURL(NSURL.init(string: item.logo! as String))
         cell.bigBkg.sd_setImageWithURL(NSURL.init(string: item.statusUrl! as String))
         cell.title.text = self.getPureString(item.text!) as String
+        cell.userName.text = item.nickname as? String
         
         return cell
     }
