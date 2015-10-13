@@ -110,7 +110,7 @@ static HRApiClient    *_oneClient = nil;
  */
 -(NSURLSessionDataTask *)getPath:(NSString *)aPath parameters:(NSMutableDictionary *)parameters completion:(ApiCompletion)aCompletion{
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    [self.requestSerializer setValue:[self buildAuthForUri:[@"/" stringByAppendingString:aPath] appkey:MOKO_APP_KEY secret:MOKO_APP_SECRET udid:@"761D9908-B207-4183-8F5C-A8A615D6CF13" user:@"1978383"] forHTTPHeaderField:@"X-MOKO-AUTH"];
+    [self.requestSerializer setValue:[self buildAuthForUri:[@"/" stringByAppendingString:aPath] appkey:MOKO_APP_KEY secret:MOKO_APP_SECRET udid:@"761D9908-B207-4183-8F5C-A8A615D6CF13" user:@"2599589"] forHTTPHeaderField:@"X-MOKO-AUTH"];
     
     return [self GET:aPath parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         if(aCompletion){
